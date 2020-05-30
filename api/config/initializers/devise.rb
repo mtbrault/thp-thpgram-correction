@@ -300,7 +300,13 @@ Devise.setup do |config|
 
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
-
+    # PROBABLY NOT NECESSARY AS WE don't need to override thde default Devise Controllers
+    # jwt.dispatch_requests = [
+    #   ['POST', %r{^/login$}]
+    # ]
+    # jwt.revocation_requests = [
+    #   ['DELETE', %r{^/users/sign_out.json$}]
+    # ]
     jwt.request_formats = {
       user: [:json]
     }
