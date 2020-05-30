@@ -4,7 +4,8 @@ version: '3.5'
 
 services:
   reactapp:
-    container_name: reactapp
+    # If it's not mandatory for the project, try not to force container's name
+    # container_name: front
     build:
       context: ./front
       dockerfile: Dockerfile
@@ -36,7 +37,7 @@ services:
       - app_internal
       - app_external
 
-    # command: bash -c "rm -rf tmp/* && rails s -p 8080 -b 0.0.0.0"
+    command: bash -c "rm -rf tmp/* && rails s -p 8080 -b 0.0.0.0"
 
 
   mailcatcher:
