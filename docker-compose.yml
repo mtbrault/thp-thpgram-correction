@@ -1,0 +1,63 @@
+# Use this file with docker-compose
+# https://docs.docker.com/compose/install/
+version: '3.5'
+
+services:
+  reactapp:
+    container_name: reactapp
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    volumes:
+      - './front:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app_internal
+      - app_external
+
+  web:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - ./api:/api
+    ports:
+      - "8080:8080"
+    links:
+      - mailcatcher
+      - postwoman
+    env_file:
+      - './api/.env.dev'
+    networks:
+      - app_internal
+      - app_external
+
+    # command: bash -c "rm -rf tmp/* && rails s -p 8080 -b 0.0.0.0"
+
+
+  mailcatcher:
+    image: djfarrelly/maildev
+    ports:
+      - "1080:80"
+    networks:
+      - app_internal
+      - app_external
+
+  postwoman:
+    image: liyasthomas/postwoman
+    ports:
+      - "1090:3000"
+    networks:
+      - app_internal
+      - app_external
+
+
+networks:
+  app_external:
+    name: app_external
+  app_internal:
+    name: app_internal
