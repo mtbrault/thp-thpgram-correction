@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   namespace :profile do
     get '', action: :show
     post '', action: :update
+    resources :comments, only: [:index]
+    resources :images, only: [:index]
   end
   root to: "home#index"
 end
