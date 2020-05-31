@@ -17,7 +17,6 @@ class ImagesController < ApplicationController
   # POST /images
   def create
     @image = Image.new(image_params)
-    # @image.stream = Base64.strict_encode64(image_params['stream'].read)
 
     if @image.save
       render json: @image, status: :created, location: @image
@@ -28,12 +27,7 @@ class ImagesController < ApplicationController
 
   # PATCH/PUT /images/1
   def update
-    operation_successfull = @image.update(image_params)
-    # if (operation_successfull and image_params.key?('stream'))
-    #   @image.update(stream: Base64.strict_encode64(image_params['stream'].read))
-    # end
-
-    if operation_successfull
+    if @image.update(image_params)
       render json: @image
     else
       render json: @image.errors, status: :unprocessable_entity
