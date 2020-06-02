@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :images
+  resources :images do
+    resources :comments, only: [:index]
+  end
+
   devise_for :users
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions',
