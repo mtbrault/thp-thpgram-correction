@@ -23,7 +23,7 @@ const Login = ({ history }) => {
 				history.push('/');
 			})
 			.catch(() => {
-				message.error('Error while loading you', 3);
+				message.error('Error while logging you', 3);
 			});
 	}
 
