@@ -59,7 +59,7 @@ const PreviewPublication = ({ previewPubs, previewVisible, toggle, isEditable, e
 
 	useEffect(() => {
 		dispatch(getCommentsById(previewPubs.id));
-	}, [previewPubs]);
+	}, [previewPubs, dispatch]);
 
 	const deletePub = () => {
 		dispatch(deletePubs(previewPubs.id))

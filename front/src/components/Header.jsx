@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row } from 'antd/es';
-import { Button } from 'antd';
+import { Col, Row, Button } from 'antd/es';
 import { withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { logoutUser, getPublications } from '../store/actions';
@@ -14,11 +13,11 @@ const Header = ({ history }) => {
 	useEffect(() => {
 		if (data.token === "")
 			history.push('/login');
-	}, [data]);
+	}, [data, history]);
 
 	useEffect(() => {
 		dispatch(getPublications());
-	}, [dispatch, getPublications])
+	}, [dispatch])
 
 	const logout = () => {
 		dispatch(logoutUser());
