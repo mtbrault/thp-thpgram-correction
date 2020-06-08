@@ -9,7 +9,7 @@ class Images::CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_image
-      @image = Image.find(params[:id])
+      @image = Image.find(params[:image_id])
     end
 
 end
