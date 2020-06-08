@@ -21,6 +21,9 @@ const Login = ({ history }) => {
 			.then(res => {
 				Cookies.set('token', res.token);
 				history.push('/');
+			})
+			.catch(() => {
+				message.error('Error while loging', 3);
 			});
 	}
 
